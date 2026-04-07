@@ -6,16 +6,38 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Entidad que representa un usuario del sistema.
+ */
+
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
+
+    /**
+     * Identificador único del usuario.
+     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Nombre completo del usuario.
+     */
+
     private String nombre;
+
+    /**
+     * Correo electrónico del usuario.
+     */
+
     private String correo;
+
+    /**
+     * Cargo o rol del usuario dentro de la empresa.
+     */
+
     private String cargo;
 
     public Usuario() {

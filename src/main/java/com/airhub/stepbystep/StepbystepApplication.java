@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * Clase principal que inicia la aplicación Spring Boot.
+ */
+
 @SpringBootApplication
 @ComponentScan(basePackages = "com.airhub.stepbystep")
 public class StepbystepApplication {
