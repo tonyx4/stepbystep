@@ -5,14 +5,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
 /**
  * Entidad que representa un usuario del sistema.
  */
 
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "users")
+public class Usuario{
 
     /**
      * Identificador único del usuario.
@@ -20,25 +21,35 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     /**
      * Nombre completo del usuario.
      */
 
+    @Column(name = "full_name")
     private String nombre;
 
     /**
      * Correo electrónico del usuario.
      */
 
+    @Column(name = "email")
     private String correo;
 
     /**
      * Cargo o rol del usuario dentro de la empresa.
      */
 
+    @Column(name = "position")
     private String cargo;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password_hash")
+    private String password;
 
     public Usuario() {
     }
@@ -80,5 +91,21 @@ public class Usuario {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
