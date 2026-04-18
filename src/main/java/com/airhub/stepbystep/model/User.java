@@ -1,24 +1,17 @@
 package com.airhub.stepbystep.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 /**
- * Entidad que representa un usuario del sistema.
+ * Entidad que representa un usuario del sistema (User Entity).
  */
-
 @Entity
 @Table(name = "users")
-public class Usuario{
+public class User {
 
     /**
      * Identificador único del usuario.
      */
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -27,23 +20,20 @@ public class Usuario{
     /**
      * Nombre completo del usuario.
      */
-
     @Column(name = "full_name")
-    private String nombre;
+    private String fullName;
 
     /**
      * Correo electrónico del usuario.
      */
-
     @Column(name = "email")
-    private String correo;
+    private String email;
 
     /**
      * Cargo o rol del usuario dentro de la empresa.
      */
-
-    @Column(name = "position")
-    private String cargo;
+    @Column(name = "role")
+    private String role;
 
     @Column(name = "username")
     private String username;
@@ -51,15 +41,21 @@ public class Usuario{
     @Column(name = "password_hash")
     private String password;
 
-    public Usuario() {
+    // Constructor vacío (Requerido por JPA)
+    public User() {
     }
 
-    public Usuario(Long id, String nombre, String correo, String cargo) {
+    // Constructor con parámetros (corregido)
+    public User(Long id, String fullName, String email, String role, String username, String password) {
         this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.cargo = cargo;
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+        this.username = username;
+        this.password = password;
     }
+
+    // Getters y Setters
 
     public Long getId() {
         return id;
@@ -69,28 +65,28 @@ public class Usuario{
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getRole() {
+        return role;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {
