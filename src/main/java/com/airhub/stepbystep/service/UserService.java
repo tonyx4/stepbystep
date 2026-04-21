@@ -11,7 +11,6 @@ import java.util.Optional;
 /**
  * Servicio que implementa la lógica de negocio para usuarios.
  */
-
 @Service
 public class UserService {
 
@@ -65,11 +64,21 @@ public class UserService {
 
             User user = existingUser.get();
 
+            // Campos básicos originales
             user.setFullName(updatedUser.getFullName());
             user.setEmail(updatedUser.getEmail());
             user.setRole(updatedUser.getRole());
             user.setUsername(updatedUser.getUsername());
             user.setPassword(updatedUser.getPassword());
+
+            // --- ADICIONES SEGÚN ESTRUCTURA DE BASE DE DATOS ---
+            // Estos campos son necesarios para no perder la información técnica
+            user.setLicenseNumber(updatedUser.getLicenseNumber());
+            user.setLicenseExpiry(updatedUser.getLicenseExpiry());
+            user.setInspectorSeal(updatedUser.getInspectorSeal());
+            user.setSpecialty(updatedUser.getSpecialty());
+            user.setStatus(updatedUser.getStatus());
+            user.setPasswordHash(updatedUser.getPasswordHash());
 
             return userRepository.save(user);
         }

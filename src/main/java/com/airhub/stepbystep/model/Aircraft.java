@@ -2,6 +2,7 @@ package com.airhub.stepbystep.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "aircraft")
@@ -9,12 +10,35 @@ import lombok.Data;
 public class Aircraft {
 
     @Id
-    @Column(name = "id") // Usaremos el ID numérico de tu phpMyAdmin para evitar errores
+    @Column(name = "id") // ID autonumérico según phpMyAdmin
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "registration")
     private String registration;
+
+    @Column(name = "msn")
+    private String msn;
+
+    // --- CAMPOS ADICIONALES PARA EVITAR ERROR 500 ---
+    // Mapeo exacto con las columnas de la base de datos
+
+    @Column(name = "model_series")
+    private String modelSeries;
+
+    @Column(name = "operator_owner")
+    private String operatorOwner;
+
+    @Column(name = "total_time_airframe")
+    private Double totalTimeAirframe;
+
+    @Column(name = "total_cycles")
+    private Integer totalCycles;
+
+    @Column(name = "date_entry")
+    private LocalDateTime dateEntry;
+
+    // --- CAMPOS DE ESTRUCTURA ORIGINAL ---
 
     @Column(name = "oem_manufacturer")
     private String oemManufacturer;
@@ -38,11 +62,8 @@ public class Aircraft {
     private Integer engineCycles;
 
     @Column(name = "aircraft_condition")
-    private String aircraftCondition; // Cambiado de 'condition' a 'aircraftCondition' para que el Service lo encuentre
+    private String aircraftCondition;
 
     @Column(name = "type_maintenance")
     private String typeMaintenance;
-
-    @Column(name = "msn")
-    private String msn;
 }

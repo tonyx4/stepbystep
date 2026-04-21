@@ -75,7 +75,7 @@ public class Component {
     private Integer cso; // Cycles Since Overhaul
 
     // 15. condition (enum(...))
-    @Column(name = "condition", nullable = false) // Mapeado como String
+    @Column(name = "'condition'", nullable = false) // Mapeado como String
     private String condition = "SV"; // Valor por defecto de tu DB
 
     // 16. warehouse_location (varchar(255))

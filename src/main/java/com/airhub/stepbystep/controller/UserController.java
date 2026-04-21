@@ -4,14 +4,16 @@ import com.airhub.stepbystep.model.User;
 import com.airhub.stepbystep.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller; // Se cambia a @Controller para manejar vistas JSP
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 /**
- * Controlador REST encargado de gestionar las operaciones CRUD de usuarios.
+ * Controlador encargado de gestionar las operaciones CRUD de usuarios,
+ * soportando tanto peticiones REST como navegación web.
  */
-
-@RestController
+@Controller // Cambiado para permitir redirecciones a vistas JSP
 @RequestMapping("/users")
 public class UserController {
 
@@ -24,9 +26,10 @@ public class UserController {
     /**
      * Obtiene la lista completa de usuarios registrados.
      *
-     * @return lista de usuarios
+     * @return lista de usuarios en formato JSON (se añade @ResponseBody)
      */
-    @GetMapping
+    @GetMapping("/api")
+    @ResponseBody
     public List<User> obtenerUsuarios() {
         return userService.getAllUsers();
     }
@@ -37,16 +40,20 @@ public class UserController {
      * @param usuario datos del usuario enviados desde Postman
      * @return usuario guardado
      */
-    @PostMapping
+    @PostMapping("/api")
+    @ResponseBody
     public User guardarUsuario(@RequestBody User usuario) {
         return userService.saveUser(usuario);
     }
 
     /**
      * Guarda un usuario desde formulario web (JSP).
+     * * @param user objeto usuario mapeado desde el formulario
+     * @return redirección a la lista de usuarios web
      */
     @PostMapping("/guardar")
-    public String saveUserFromForm(User user) {
+    public String saveUserFromForm(@ModelAttribute("user") User user) {
+        // Al recibir el objeto 'user', Spring ya trae licencia, especialidad, etc.
         userService.saveUser(user);
         return "redirect:/usuarios-web";
     }
@@ -58,7 +65,8 @@ public class UserController {
      * @param usuario nuevos datos del usuario
      * @return usuario actualizado
      */
-    @PutMapping("/{id}")
+    @PutMapping("/api/{id}")
+    @ResponseBody
     public User actualizarUsuario(@PathVariable Long id, @RequestBody User usuario) {
         return userService.updateUser(id, usuario);
     }
@@ -67,8 +75,10 @@ public class UserController {
      * Elimina un usuario de la base de datos según su identificador.
      *
      * @param id identificador del usuario a eliminar
+     * @return redirección o estado
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/{id}")
+    @ResponseBody
     public void eliminarUsuario(@PathVariable Long id) {
         userService.deleteUser(id);
     }
